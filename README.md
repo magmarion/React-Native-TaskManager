@@ -2,7 +2,7 @@
 
 A simple and responsive **Task Manager** built with **React Native** and **Expo**. This app allows you to create and remove tasks with a clean, intuitive interface. It supports both mobile devices (via Expo Go) and the web.
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Install dependencies**
 
