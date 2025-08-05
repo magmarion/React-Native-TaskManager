@@ -5,18 +5,19 @@ interface TaskProps {
     text: string;
 }
 
-const Task: React.FC<TaskProps> = (props: TaskProps) => {
-
+const Task = ({ text, onPress }: TaskProps) => {
     return (
-        <View style={styles.item}>
-            <View style={styles.itemLeft}>
-                <TouchableOpacity style={styles.square}></TouchableOpacity>
-                <Text style={styles.itemText}>{props.text}</Text>
+        <TouchableOpacity onPress={onPress}>
+            <View style={styles.item}>
+                <View style={styles.itemLeft}>
+                    <View style={styles.square}></View>
+                    <Text style={styles.itemText}>{text}</Text>
+                </View>
+                <View style={styles.circular}></View>
             </View>
-            <View style={styles.circular}></View>
-        </View>
-    )
-}
+        </TouchableOpacity>
+    );
+};
 
 const styles = StyleSheet.create({
     item: {
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginRight: 15,
     },
-    itemText: { 
+    itemText: {
         maxWidth: "80%",
         marginLeft: 10,
         fontSize: 16,
