@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
     Keyboard,
     KeyboardAvoidingView,
@@ -39,11 +38,11 @@ export default function App() {
             style={styles.container}
             keyboardVerticalOffset={80}
         >
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            {Platform.OS === "web" ? (
                 <View style={styles.inner}>
-
-                    {/* Task section */}
+                    {/* web task section */}
                     <View style={styles.taskWrapper}>
+
                         <Text style={styles.sectionTitle}>Today&apos;s Tasks</Text>
 
                         <ScrollView contentContainerStyle={styles.items}>
@@ -53,10 +52,9 @@ export default function App() {
                             ))}
 
                         </ScrollView>
-
                     </View>
 
-                    {/* Input section */}
+                    {/* web input section */}
                     <View style={styles.writeTaskWrapper}>
                         <TextInput
                             style={styles.input}
@@ -72,7 +70,41 @@ export default function App() {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </TouchableWithoutFeedback>
+            ) : (
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                    <View style={styles.inner}>
+                        {/* mobile task section */}
+                        <View style={styles.taskWrapper}>
+
+                            <Text style={styles.sectionTitle}>Today&apos;s Tasks</Text>
+
+                            <ScrollView contentContainerStyle={styles.items}>
+
+                                {taskItems.map((item, index) => (
+                                    <Task key={index} text={item} onPress={() => completeTask(index)} />
+                                ))}
+
+                            </ScrollView>
+                        </View>
+
+                        {/* mobile input section */}
+                        <View style={styles.writeTaskWrapper}>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Write a task"
+                                placeholderTextColor="#888"
+                                value={task}
+                                onChangeText={setTask}
+                            />
+                            <TouchableOpacity onPress={handleAddTask}>
+                                <View style={styles.addWrapper}>
+                                    <Text style={styles.addText}>+</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </TouchableWithoutFeedback>
+            )}
         </KeyboardAvoidingView>
     );
 }
@@ -128,6 +160,6 @@ const styles = StyleSheet.create({
     addText: {
         color: "#FFF",
         fontSize: 40,
-        lineHeight: 44, // slightly larger than fontSize
+        lineHeight: 44,
     },
 });

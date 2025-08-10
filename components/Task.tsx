@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface TaskProps {
     text: string;
+    onPress: () => void;
 }
 
 const Task = ({ text, onPress }: TaskProps) => {
