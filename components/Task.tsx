@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface TaskProps {
     text: string;
@@ -29,12 +29,13 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-between",
         marginBottom: 20,
+        width: "100%",
     },
     itemLeft: {
         flexDirection: "row",
         alignItems: "center",
         flexWrap: "wrap",
-
+        flex: 1,
     },
     square: {
         width: 24,
@@ -45,21 +46,19 @@ const styles = StyleSheet.create({
         marginRight: 15,
     },
     itemText: {
-        maxWidth: "80%",
-        marginLeft: 10,
-        fontSize: 16,
+        flexShrink: 1,
+        fontSize: Platform.select({ web: 18, default: 16 }),
         color: "#333",
-
     },
     circular: {
-        width: 12,
-        height: 12,
+        width: 14,
+        height: 14,
         borderColor: "#55BCF6",
         borderWidth: 2,
-        borderRadius: 5,
+        borderRadius: 7,
         opacity: 0.5,
     },
-
 });
+
 
 export default Task;
