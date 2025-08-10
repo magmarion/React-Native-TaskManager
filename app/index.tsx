@@ -26,6 +26,12 @@ export default function App() {
         }
     };
 
+    const handleKeyPress = (e: any) => {
+        if (e.nativeEvent.key === 'Enter' && Platform.OS === 'web') {
+            handleAddTask();
+        }
+    };
+
     const completeTask = (index: number) => {
         let itemsCopy = [...taskItems];
         itemsCopy.splice(index, 1);
@@ -62,6 +68,8 @@ export default function App() {
                             placeholderTextColor="#888"
                             value={task}
                             onChangeText={setTask}
+                            onKeyPress={handleKeyPress}
+                            returnKeyType="done"
                         />
                         <TouchableOpacity onPress={handleAddTask}>
                             <View style={styles.addWrapper}>
